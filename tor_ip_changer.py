@@ -709,9 +709,7 @@ if __name__ == "__main__":
         except Exception:
             pass # If tkinter fails here, there's nothing more we can do.
     finally:
-        # This block is now less likely to cause an error because we check if 'root' exists.
-        if root and root.winfo_exists():
-            try:
-                root.destroy()
-            except Exception:
-                pass # Ignore final destroy errors
+        # The `on_closing` method handles the destruction of the root window during a normal exit.
+        # This `finally` block can cause an error if it tries to access the already-destroyed window.
+        # The main cleanup is handled by the application's `on_closing` protocol.
+        pass
